@@ -1,7 +1,5 @@
-import json
 from unittest.mock import patch
 
-import pytest
 import requests
 
 from api_call import get_data, post_data
@@ -21,9 +19,8 @@ def test_get_data_success(mock_get):
 
 @patch("api_call.requests.get")
 def test_get_data_http_error(mock_get):
-    mock_get.return_value.raise_for_status.side_effect = (
-        requests.exceptions.HTTPError("404")
-    )
+    error = requests.exceptions.HTTPError("404")
+    mock_get.return_value.raise_for_status.side_effect = error
 
     result = get_data("https://example.com/api")
 
@@ -53,9 +50,8 @@ def test_post_data_success(mock_post):
 
 @patch("api_call.requests.post")
 def test_post_data_request_error(mock_post):
-    mock_post.return_value.raise_for_status.side_effect = (
-        requests.exceptions.ConnectionError
-    )
+    error = requests.exceptions.ConnectionError
+    mock_post.return_value.raise_for_status.side_effect = error
 
     result = post_data("https://example.com/api", {"title": "test"})
 
