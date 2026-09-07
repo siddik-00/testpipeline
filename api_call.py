@@ -1,5 +1,6 @@
-import requests
 import json
+
+import requests
 
 
 def get_data(url, headers=None, params=None):
