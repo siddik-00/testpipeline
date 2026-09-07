@@ -108,7 +108,7 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Install build tools
-        run: pip build twine
+        run: pip install build twine
 
       - name: Build package
         run: python -m build
